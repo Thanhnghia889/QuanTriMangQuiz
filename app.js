@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initApp() {
-  document.documentElement.dataset.appPatch = '20260525-history-review-1';
+  document.documentElement.dataset.appPatch = '20260525-mobile-polish-1';
   initTheme();
   loadLocalStorage();
   mergeQuestions();
@@ -334,6 +334,7 @@ function renderDashboardTab() {
   const historyEl = document.getElementById('dashboard-exam-history');
   if (state.examHistory.length > 0) {
     historyEl.innerHTML = `
+      <div class="table-responsive dashboard-history-table">
       <table class="q-table" style="font-size: 0.85rem;">
         <thead>
           <tr>
@@ -361,6 +362,7 @@ function renderDashboardTab() {
           }).join('')}
         </tbody>
       </table>
+      </div>
     `;
     historyEl.querySelectorAll('[data-history-index]').forEach(btn => {
       btn.addEventListener('click', () => {
