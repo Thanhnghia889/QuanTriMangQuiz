@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ôn Thi Quản Trị Mạng Premium</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=20260525-history-review-1">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <i data-lucide="shield-alert"></i>
+        </div>
+        <div class="logo-text">
+          <h2>Quản Trị Mạng</h2>
+          <span>Ôn Thi Học Phần</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-tab="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Bảng điều khiển</span>
+        </button>
+        <button class="nav-btn" data-tab="study">
+          <i data-lucide="book-open"></i>
+          <span>Luyện tập</span>
+        </button>
+        <button class="nav-btn" data-tab="exam">
+          <i data-lucide="award"></i>
+          <span>Thi thử</span>
+        </button>
+        <button class="nav-btn" data-tab="bookmarks">
+          <i data-lucide="bookmark"></i>
+          <span>Câu hỏi ghim</span>
+        </button>
+        <button class="nav-btn" data-tab="import">
+          <i data-lucide="file-input"></i>
+          <span>Nhập từ ChatGPT</span>
+        </button>
+        <button class="nav-btn" data-tab="manage">
+          <i data-lucide="database"></i>
+          <span>Quản lý câu hỏi</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">QTM</div>
+          <div class="user-info">
+            <p class="user-name">Đề Cương Tự Soạn</p>
+            <p class="user-role">Học Kỳ II - 2026</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Navigation Bar -->
+    <nav class="mobile-nav">
+      <button class="mobile-nav-btn active" data-tab="dashboard">
+        <i data-lucide="layout-dashboard"></i>
+        <span>Bảng tin</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="study">
+        <i data-lucide="book-open"></i>
+        <span>Học tập</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="exam">
+        <i data-lucide="award"></i>
+        <span>Thi thử</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="bookmarks">
+        <i data-lucide="bookmark"></i>
+        <span>Đã ghim</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="import">
+        <i data-lucide="file-input"></i>
+        <span>Nhập CHAT</span>
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Section Header -->
+      <header class="content-header">
+        <div class="header-title">
+          <h1 id="page-title">Bảng điều khiển</h1>
+          <p id="page-description">Theo dõi tiến độ học tập và lựa chọn chế độ ôn tập phù hợp.</p>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="btn btn-secondary theme-toggle" type="button" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện sáng/tối">
+            <i data-lucide="sun-moon"></i>
+            <span id="theme-toggle-label">Dark</span>
+          </button>
+          <button id="quick-mixed-exam" class="btn btn-primary btn-glow">
+            <i data-lucide="zap"></i>
+            <span>Thi thử hỗn hợp nhanh</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Views (SPA tabs) -->
+      <div class="view-container">
+        
+        <!-- DASHBOARD VIEW -->
+        <section id="view-dashboard" class="tab-view active">
+          <!-- Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Tổng câu hỏi hiện có</span>
+                <h3 class="stat-value" id="stat-total-questions">0</h3>
+                <span class="stat-desc" id="stat-custom-count">0 câu tự thêm</span>
+              </div>
+              <div class="stat-icon icon-cyan">
+                <i data-lucide="library"></i>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Tỷ lệ trả lời chính xác</span>
+                <h3 class="stat-value" id="stat-accuracy-rate">0%</h3>
+                <span class="stat-desc" id="stat-accuracy-desc">Tính trên các câu đã làm</span>
+              </div>
+              <div class="stat-icon icon-emerald">
+                <i data-lucide="check-circle-2"></i>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Câu hỏi đã ghim</span>
+                <h3 class="stat-value" id="stat-bookmarked-count">0</h3>
+                <span class="stat-desc">Cần ôn luyện lại kỹ hơn</span>
+              </div>
+              <div class="stat-icon icon-violet">
+                <i data-lucide="bookmark"></i>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-info">
+                <span class="stat-label">Lần thi thử cao nhất</span>
+                <h3 class="stat-value" id="stat-highest-exam">0/0</h3>
+                <span class="stat-desc" id="stat-exam-count">Chưa làm bài thi nào</span>
+              </div>
+              <div class="stat-icon icon-amber">
+                <i data-lucide="trophy"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Study Chapters -->
+          <div class="section-container">
+            <div class="section-header">
+              <h2>6 Chương Lý Thuyết Theo Slide Giảng Viên</h2>
+              <p>Chọn chương để bắt đầu ôn tập lý thuyết và trắc nghiệm</p>
+            </div>
+            
+            <div class="chapters-grid" id="dashboard-chapters-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Recent Activity & Study Tips -->
+          <div class="grid-2col mt-4">
+            <div class="card glass-card">
+              <div class="card-header">
+                <h3><i data-lucide="history" class="mr-2 text-cyan"></i>Lịch sử thi thử</h3>
+              </div>
+              <div class="card-content" id="dashboard-exam-history">
+                <div class="empty-state">
+                  <i data-lucide="calendar"></i>
+                  <p>Bạn chưa thực hiện bài thi thử nào.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card glass-card">
+              <div class="card-header">
+                <h3><i data-lucide="lightbulb" class="mr-2 text-amber"></i>Lời khuyên ôn tập</h3>
+              </div>
+              <div class="card-content">
+                <ul class="tips-list">
+                  <li>
+                    <strong class="text-cyan">Tự soạn đề cương từ ChatGPT:</strong> Bạn có thể dùng ChatGPT tạo thêm câu hỏi theo sát slide bài học bằng cách copy nội dung chương và dán vào tab <strong>"Nhập từ ChatGPT"</strong>.
+                  </li>
+                  <li>
+                    <strong class="text-emerald">Luyện tập từng chương trước:</strong> Hãy học kỹ lý thuyết trong slide qua câu hỏi trắc nghiệm của từng chương, đảm bảo đạt trên 80% câu đúng trước khi thi thử.
+                  </li>
+                  <li>
+                    <strong class="text-violet">Ghim câu hỏi khó:</strong> Bất cứ khi nào làm sai hoặc gặp câu hỏi nhiều lệnh Cisco khó nhớ (như chương 3), hãy bấm icon Ghim để gom lại ôn luyện riêng.
+                  </li>
+                  <li>
+                    <strong class="text-amber">Giả lập thi thật:</strong> Chế độ Thi thử sẽ chọn ngẫu nhiên các câu hỏi từ tất cả các chương và giới hạn thời gian làm bài, hãy tắt tài liệu để tự đánh giá nhé!
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STUDY VIEW -->
+        <section id="view-study" class="tab-view">
+          <div class="study-layout">
+            <!-- Chapter Selector Sidebar -->
+            <div class="study-sidebar card glass-card">
+              <h3>Chọn chương học</h3>
+              <label class="setting-toggle study-answer-mode">
+                <input type="checkbox" id="study-auto-explain" checked>
+                <span class="toggle-track" aria-hidden="true"></span>
+                <span class="toggle-copy">
+                  <strong>Hiện đáp án ngay</strong>
+                  <small>Sau khi chọn câu trả lời</small>
+                </span>
+              </label>
+              <div class="chapter-nav-list" id="study-chapter-menu">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+            
+            <!-- Quiz Card Area -->
+            <div class="study-main">
+              <div class="card glass-card quiz-container" id="study-quiz-card">
+                <!-- Active Quiz Info Header -->
+                <div class="quiz-header">
+                  <div class="quiz-meta">
+                    <span class="badge badge-cyan" id="study-chapter-badge">Chương 1</span>
+                    <span class="quiz-progress-text" id="study-progress-text">Câu hỏi 1 / 15</span>
+                  </div>
+                  <div class="quiz-actions">
+                    <button class="btn-icon" id="btn-bookmark-study" title="Ghim câu hỏi này">
+                      <i data-lucide="bookmark"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                  <div class="progress-bar-fill" id="study-progress-bar" style="width: 0%;"></div>
+                </div>
+                
+                <!-- Question Text -->
+                <div class="quiz-question-box">
+                  <h3 id="study-question-text">Đang tải câu hỏi...</h3>
+                </div>
+                
+                <!-- Options List -->
+                <div class="quiz-options-list" id="study-options-list">
+                  <!-- Rendered dynamically -->
+                </div>
+                
+                <!-- Feedback & Explanation Box -->
+                <div class="explanation-box hidden" id="study-explanation-box">
+                  <div class="explanation-status" id="study-feedback-status">
+                    <i data-lucide="info"></i>
+                    <span id="study-feedback-text">Chính xác!</span>
+                  </div>
+                  <div class="explanation-content">
+                    <p id="study-explanation-text">Chọn một đáp án để xem giải thích kiến thức.</p>
+                  </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="quiz-footer">
+                  <button class="btn btn-secondary" id="btn-prev-study">
+                    <i data-lucide="arrow-left"></i> Quay lại
+                  </button>
+                  <button class="btn btn-secondary" id="btn-show-answer" disabled>
+                    <i data-lucide="sparkles"></i> Tự hiện đáp án
+                  </button>
+                  <button class="btn btn-primary" id="btn-next-study">
+                    Tiếp theo <i data-lucide="arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXAM VIEW -->
+        <section id="view-exam" class="tab-view">
+          <div class="exam-start-container" id="exam-setup-box">
+            <div class="card glass-card text-center max-w-600 mx-auto py-5">
+              <div class="exam-icon-glow">
+                <i data-lucide="award"></i>
+              </div>
+              <h2 class="mt-4">Chế Độ Thi Thử Quản Trị Mạng</h2>
+              <p class="text-muted mt-2">Đề thi mô phỏng kết thúc học phần: trộn ngẫu nhiên 50 câu từ ngân hàng 300 câu, thời gian làm bài 60 phút.</p>
+              
+              <div class="exam-settings-box mt-4">
+                <div class="form-group">
+                  <label for="exam-question-count">Số lượng câu hỏi:</label>
+                  <select id="exam-question-count" class="form-control">
+                    <option value="20">20 câu hỏi (Ôn nhanh)</option>
+                    <option value="30">30 câu hỏi (Luyện vừa)</option>
+                    <option value="40">40 câu hỏi</option>
+                    <option value="50" selected>50 câu hỏi (Chuẩn thi thử)</option>
+                  </select>
+                </div>
+                
+                <div class="form-group mt-3">
+                  <label for="exam-time-limit">Thời gian làm bài (phút):</label>
+                  <select id="exam-time-limit" class="form-control">
+                    <option value="15">15 phút</option>
+                    <option value="30">30 phút</option>
+                    <option value="45">45 phút</option>
+                    <option value="60" selected>60 phút (Chuẩn thi thử)</option>
+                  </select>
+                </div>
+
+                <div class="form-group mt-3">
+                  <label>Phạm vi câu hỏi:</label>
+                  <div class="checkbox-group" id="exam-scope-selection">
+                    <!-- Dynamic rendering of chapter checkboxes -->
+                  </div>
+                </div>
+              </div>
+              
+              <button id="btn-start-exam" class="btn btn-primary btn-glow mt-4 btn-lg">
+                <i data-lucide="play-circle" class="mr-2"></i> Bắt đầu thi thử
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Exam Screen -->
+          <div class="exam-active-container hidden" id="exam-active-box">
+            <div class="exam-header-bar card glass-card">
+              <div class="exam-meta-info">
+                <span class="exam-title-badge"><i data-lucide="shield-check"></i> Đang thi thử</span>
+                <span class="exam-progress-desc" id="exam-progress-desc">Câu 1 / 50</span>
+              </div>
+              <div class="exam-timer" id="exam-timer-display">
+                <i data-lucide="timer"></i>
+                <span id="exam-timer-text">30:00</span>
+              </div>
+              <div class="exam-actions">
+                <button class="btn btn-danger" id="btn-submit-exam">
+                  <i data-lucide="check-square"></i> Nộp bài
+                </button>
+              </div>
+            </div>
+
+            <div class="exam-main-layout mt-3">
+              <!-- Question Cards -->
+              <div class="exam-question-area">
+                <div class="card glass-card quiz-container py-4">
+                  <div class="quiz-question-box">
+                    <h3 id="exam-question-text">Nội dung câu hỏi thi thử sẽ xuất hiện ở đây...</h3>
+                  </div>
+                  
+                  <div class="quiz-options-list" id="exam-options-list">
+                    <!-- Options -->
+                  </div>
+                  
+                  <div class="quiz-footer mt-4">
+                    <button class="btn btn-secondary" id="btn-prev-exam">
+                      <i data-lucide="arrow-left"></i> Câu trước
+                    </button>
+                    <button class="btn btn-secondary" id="btn-flag-exam">
+                      <i data-lucide="flag"></i> Đánh dấu câu hỏi
+                    </button>
+                    <button class="btn btn-primary" id="btn-next-exam">
+                      Câu tiếp theo <i data-lucide="arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Question Sheet Grid (Quick navigation) -->
+              <div class="exam-nav-panel card glass-card">
+                <h3>Phiếu trả lời</h3>
+                <p class="text-muted small">Bấm vào số câu hỏi để chuyển nhanh:</p>
+                <div class="exam-sheet-grid" id="exam-sheet-grid">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BOOKMARKS VIEW -->
+        <section id="view-bookmarks" class="tab-view">
+          <div class="bookmarks-container" id="bookmarks-list-container">
+            <!-- Active bookmarks cards -->
+          </div>
+        </section>
+
+        <!-- IMPORT FROM CHATGPT VIEW -->
+        <section id="view-import" class="tab-view">
+          <div class="grid-2col">
+            <!-- Input Panel -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h3><i data-lucide="keyboard" class="mr-2 text-cyan"></i>Dán văn bản câu hỏi từ ChatGPT</h3>
+              </div>
+              <div class="card-content">
+                <p class="text-muted small mb-3">Copy-paste trực tiếp văn bản trắc nghiệm được tạo từ ChatGPT vào khung dưới đây. Hệ thống sẽ tự động nhận diện câu hỏi, các lựa chọn A/B/C/D, đáp án đúng và giải thích.</p>
+                
+                <div class="form-group mb-3">
+                  <label for="import-chapter-select">Lưu vào chương:</label>
+                  <select id="import-chapter-select" class="form-control">
+                    <option value="1">Chương 1: Khái niệm cơ bản trong quản lý mạng máy tính</option>
+                    <option value="2">Chương 2: Mô hình thông tin quản lý mạng</option>
+                    <option value="3">Chương 3: Quản lý cấu hình</option>
+                    <option value="4">Chương 4: Quản lý lỗi</option>
+                    <option value="5">Chương 5: Quản lý hiệu suất hoạt động</option>
+                    <option value="6">Chương 6: Quản lý bảo mật</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="import-text-input">Văn bản câu hỏi:</label>
+                  <textarea id="import-text-input" class="form-control text-area-import" placeholder="Ví dụ định dạng ChatGPT:
+Câu 1: Giao thức nào hoạt động ở tầng Network?
+A. TCP
+B. UDP
+C. IP
+D. HTTP
+Đáp án: C
+Giải thích: IP định tuyến gói tin ở tầng 3.
+
+---
+Câu 2: ..."></textarea>
+                </div>
+                
+                <div class="mt-3 d-flex gap-2">
+                  <button id="btn-parse-import" class="btn btn-cyan btn-glow">
+                    <i data-lucide="eye" class="mr-1"></i> Preview / Phân tích thử
+                  </button>
+                  <button id="btn-clear-import" class="btn btn-secondary">
+                    <i data-lucide="trash-2"></i> Xóa nhập liệu
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h3><i data-lucide="file-check" class="mr-2 text-emerald"></i>Kết quả phân tích preview</h3>
+              </div>
+              <div class="card-content preview-scroll-box" id="import-preview-box">
+                <div class="empty-state">
+                  <i data-lucide="eye-off"></i>
+                  <p>Bấm 'Preview / Phân tích thử' để xem trước các câu hỏi được trích xuất.</p>
+                </div>
+              </div>
+              <div class="card-footer-fixed hidden" id="import-preview-actions">
+                <span class="preview-status-text" id="preview-status-text">Đã phân tích 0 câu hỏi thành công.</span>
+                <button id="btn-save-imported" class="btn btn-primary btn-glow">
+                  <i data-lucide="save"></i> Lưu vào cơ sở dữ liệu
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prompt Guide -->
+          <div class="card glass-card mt-4">
+            <div class="card-header">
+              <h3><i data-lucide="message-square" class="mr-2 text-violet"></i>Gợi ý câu lệnh (Prompt) gửi ChatGPT để tạo câu hỏi</h3>
+            </div>
+            <div class="card-content">
+              <p>Bạn có thể copy câu lệnh mẫu dưới đây gửi cho ChatGPT để tạo định dạng câu hỏi chuẩn nhất mà phần mềm có thể phân tích 100% chính xác:</p>
+              
+              <div class="code-box mt-2">
+                <button class="btn-copy-code" id="btn-copy-prompt">
+                  <i data-lucide="copy"></i> Copy câu lệnh
+                </button>
+                <code id="prompt-code-text">Hãy tạo cho tôi 15 câu hỏi trắc nghiệm tiếng Việt khách quan có đáp án và giải thích về chủ đề: "[Nhập tên chương hoặc copy văn bản slide vào đây]".
+Yêu cầu bắt buộc đầu ra tuân thủ định dạng sau để tôi dán vào hệ thống:
+
+Câu 1: [Câu hỏi]
+A. [Lựa chọn A]
+B. [Lựa chọn B]
+C. [Lựa chọn C]
+D. [Lựa chọn D]
+Đáp án: [A hoặc B hoặc C hoặc D]
+Giải thích: [Giải thích lý do chọn đáp án này ngắn gọn]
+
+Ngăn cách giữa mỗi câu bằng một dòng "---"</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANAGE CUSTOM QUESTIONS VIEW -->
+        <section id="view-manage" class="tab-view">
+          <div class="card glass-card">
+            <div class="card-header manage-header-actions">
+              <div class="search-box-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="manage-search" class="form-control" placeholder="Tìm kiếm câu hỏi...">
+              </div>
+              <div class="filters-container">
+                <select id="manage-filter-chapter" class="form-control select-compact">
+                  <option value="all">Tất cả các chương</option>
+                  <option value="1">Chương 1</option>
+                  <option value="2">Chương 2</option>
+                  <option value="3">Chương 3</option>
+                  <option value="4">Chương 4</option>
+                  <option value="5">Chương 5</option>
+                  <option value="6">Chương 6</option>
+                </select>
+                <select id="manage-filter-source" class="form-control select-compact">
+                  <option value="all">Tất cả nguồn</option>
+                  <option value="builtin">Mặc định hệ thống</option>
+                  <option value="custom">Người dùng thêm (Local)</option>
+                </select>
+                <button id="btn-add-manual" class="btn btn-primary">
+                  <i data-lucide="plus"></i> Thêm câu hỏi
+                </button>
+              </div>
+            </div>
+            
+            <div class="card-content">
+              <div class="table-responsive">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 80px;">Chương</th>
+                      <th>Nội dung câu hỏi</th>
+                      <th style="width: 100px;">Đáp án</th>
+                      <th style="width: 120px;">Nguồn</th>
+                      <th style="width: 120px; text-align: center;">Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="manage-questions-list">
+                    <!-- Rendered dynamically -->
+                  </tbody>
+                </table>
+              </div>
+              <div id="manage-empty-state" class="empty-state hidden">
+                <i data-lucide="folder-open"></i>
+                <p>Không tìm thấy câu hỏi nào khớp với bộ lọc.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+
+  <!-- EXAM RESULT MODAL -->
+  <div class="modal-overlay hidden" id="modal-exam-result">
+    <div class="modal-box glass-card max-w-600 text-center py-5">
+      <div class="modal-header-accent success" id="exam-result-accent">
+        <i data-lucide="award" id="exam-result-icon"></i>
+      </div>
+      <h2 class="mt-4" id="exam-result-title">Hoàn thành bài thi!</h2>
+      <p class="text-muted" id="exam-result-meta">Thời gian làm bài: 60 phút | Tổng số câu: 50</p>
+      
+      <div class="score-display-box mt-4">
+        <div class="score-circle">
+          <span class="score-num" id="exam-result-score">32</span>
+          <span class="score-total">/50</span>
+        </div>
+        <div class="score-percentage" id="exam-result-percent">80%</div>
+      </div>
+      
+      <p class="result-message mt-3" id="exam-result-message">Chúc mừng bạn! Kết quả rất tốt, sẵn sàng cho kỳ thi thật.</p>
+      
+      <div class="grid-2col mt-4 border-top pt-4">
+        <div>
+          <h4 class="text-emerald">Trả lời Đúng</h4>
+          <h3 id="exam-result-correct">32 câu</h3>
+        </div>
+        <div>
+          <h4 class="text-danger">Trả lời Sai</h4>
+          <h3 id="exam-result-incorrect">8 câu</h3>
+        </div>
+      </div>
+
+      <div class="mt-4 flex-center gap-2">
+        <button class="btn btn-primary" id="btn-close-result">
+          <i data-lucide="layout-dashboard" class="mr-1"></i> Về bảng điều khiển
+        </button>
+        <button class="btn btn-secondary" id="btn-review-exam-errors">
+          <i data-lucide="alert-triangle" class="mr-1"></i> Xem các câu làm sai
+        </button>
+        <button class="btn btn-secondary" id="btn-review-full-exam">
+          <i data-lucide="file-search" class="mr-1"></i> Xem lại bài làm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM HISTORY REVIEW MODAL -->
+  <div class="modal-overlay hidden" id="modal-exam-history-review">
+    <div class="modal-box glass-card max-w-900 exam-history-review-modal">
+      <div class="modal-header">
+        <div>
+          <h3 id="history-review-title">Xem lại bài thi thử</h3>
+          <p class="text-muted" id="history-review-summary">Điểm: 0/50</p>
+        </div>
+        <button class="btn-close-modal" id="btn-close-history-review"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body mt-3" id="history-review-list"></div>
+    </div>
+  </div>
+
+  <!-- MANUAL QUESTION EDIT/ADD MODAL -->
+  <div class="modal-overlay hidden" id="modal-question-editor">
+    <div class="modal-box glass-card max-w-700">
+      <div class="modal-header">
+        <h3 id="editor-modal-title">Thêm / Sửa câu hỏi trắc nghiệm</h3>
+        <button class="btn-close-modal" id="btn-close-editor"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body mt-3">
+        <form id="question-editor-form">
+          <input type="hidden" id="editor-q-id">
+          
+          <div class="form-group mb-3">
+            <label for="editor-q-chapter">Thuộc chương:</label>
+            <select id="editor-q-chapter" class="form-control" required>
+              <option value="1">Chương 1: Khái niệm cơ bản trong quản lý mạng máy tính</option>
+              <option value="2">Chương 2: Mô hình thông tin quản lý mạng</option>
+              <option value="3">Chương 3: Quản lý cấu hình</option>
+              <option value="4">Chương 4: Quản lý lỗi</option>
+              <option value="5">Chương 5: Quản lý hiệu suất hoạt động</option>
+              <option value="6">Chương 6: Quản lý bảo mật</option>
+            </select>
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="editor-q-text">Nội dung câu hỏi:</label>
+            <textarea id="editor-q-text" class="form-control" rows="3" required placeholder="Nhập câu hỏi..."></textarea>
+          </div>
+          
+          <div class="grid-2col mb-3">
+            <div class="form-group">
+              <label for="editor-q-optA">Lựa chọn A:</label>
+              <input type="text" id="editor-q-optA" class="form-control" required placeholder="Nội dung đáp án A">
+            </div>
+            <div class="form-group">
+              <label for="editor-q-optB">Lựa chọn B:</label>
+              <input type="text" id="editor-q-optB" class="form-control" required placeholder="Nội dung đáp án B">
+            </div>
+          </div>
+
+          <div class="grid-2col mb-3">
+            <div class="form-group">
+              <label for="editor-q-optC">Lựa chọn C:</label>
+              <input type="text" id="editor-q-optC" class="form-control" required placeholder="Nội dung đáp án C">
+            </div>
+            <div class="form-group">
+              <label for="editor-q-optD">Lựa chọn D:</label>
+              <input type="text" id="editor-q-optD" class="form-control" required placeholder="Nội dung đáp án D">
+            </div>
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="editor-q-answer">Đáp án đúng:</label>
+            <select id="editor-q-answer" class="form-control" required>
+              <option value="A">Đáp án A</option>
+              <option value="B">Đáp án B</option>
+              <option value="C">Đáp án C</option>
+              <option value="D">Đáp án D</option>
+            </select>
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="editor-q-explanation">Giải thích đáp án:</label>
+            <textarea id="editor-q-explanation" class="form-control" rows="3" placeholder="Giải thích ngắn gọn lý do vì sao đáp án này là đúng..."></textarea>
+          </div>
+          
+          <div class="mt-4 flex-end gap-2">
+            <button type="button" class="btn btn-secondary" id="btn-cancel-editor">Hủy bỏ</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-editor">Lưu lại</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Logic Files -->
+  <script src="questions.js?v=20260525-history-review-1"></script>
+  <script src="app.js?v=20260525-history-review-1"></script>
+  <script>
+    document.addEventListener('click', (event) => {
+      const option = event.target.closest('#study-options-list .option-item');
+      if (!option) return;
+
+      setTimeout(() => {
+        const questionText = document.getElementById('study-question-text')?.textContent?.trim();
+        const explanationEl = document.getElementById('study-explanation-text');
+        if (!questionText || !explanationEl || typeof BUILTIN_QUESTIONS === 'undefined') return;
+
+        const currentQuestion = BUILTIN_QUESTIONS.find(item => item.question === questionText);
+        if (!currentQuestion) return;
+
+        const fallbackIndex = ['A', 'B', 'C', 'D'].indexOf(currentQuestion.answer);
+        const fallback = (currentQuestion.options?.[fallbackIndex] || '').replace(/^[A-D](\.|\:)\s*/, '').trim();
+        const explanation = (currentQuestion.explanation || '').trim() || `Kien thuc can nho: ${fallback}`;
+        explanationEl.textContent = explanation;
+        explanationEl.setAttribute('title', explanation);
+      }, 30);
+    }, true);
+  </script>
+</body>
+</html>
